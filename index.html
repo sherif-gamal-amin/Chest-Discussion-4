@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .timer {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .question-result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1></h1>
+        <div class="timer" id="timer">Time remaining: 60 seconds</div>
+
+        <div class="question" id="question-1">
+            <p>1. 53-year-old woman has had asthma for 30 years. It had been well controlled until the last year. Despite escalation of her inhaled therapies and intermittent oral corticosteroids, she has an ongoing cough productive of copious volumes of green sputum, breathlessness and wheeze. After review in the respiratory clinic she is sent for a CT scan. What is your diagnosis here?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Bronchiectasis"> Bronchiectasis</label>
+                <label><input type="radio" name="q1" value="Chronic bronchitis and emphysema"> Chronic bronchitis and emphysema</label>
+                <label><input type="radio" name="q1" value="Cystic fibrosis"> Cystic fibrosis</label>
+                <label><input type="radio" name="q1" value="Honeycombing and interstitial fibrosis"> Honeycombing and interstitial fibrosis</label>
+                <label><input type="radio" name="q1" value="Typical changes of asthma"> Typical changes of asthma</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-2">
+            <p>2. 55-year-old woman with long-standing chronic obstructive lung disease and episodes of acute bronchitis complains of increasing sputum production, which now occurs on a daily basis. Sputum is thick, and daily sputum production has dramatically increased over several months. There are flecks of blood in the sputum. The patient has lost 8 lb. Fever and chills are absent, and sputum cultures have not revealed specific pathogens. CT chest shows honeycomb appearance. Which of the following is the most likely cause of the patient’s symptoms?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="Pulmonary tuberculosis"> Pulmonary tuberculosis</label>
+                <label><input type="radio" name="q2" value="Exacerbation of chronic bronchitis"> Exacerbation of chronic bronchitis</label>
+                <label><input type="radio" name="q2" value="Bronchiectasis"> Bronchiectasis</label>
+                <label><input type="radio" name="q2" value="Anaerobic lung abscess"> Anaerobic lung abscess</label>
+                <label><input type="radio" name="q2" value="Carcinoma of the lung"> Carcinoma of the lung</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-3">
+            <p>3. 55-year-old woman presents with coughing up blood and sputum. She gives a history of recurrent pneumonias and a chronic cough productive of foul-smelling purulent sputum. The sputum production is worse on lying down and in the morning. On physical examination, she appears chronically ill with clubbing of the fingers. Wet inspiratory crackles are heard at the lung bases posteriorly. There are no hepatosplenomegaly or any palpable lymph nodes. CXR shows scaring in the right lower lobe, which on chest CT scan is identified as airway dilatation, bronchial wall thickening, and grape like cysts. Which of the following is a recognized precursor to this patient’s condition?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="Bronchial asthma"> Bronchial asthma</label>
+                <label><input type="radio" name="q3" value="Cigarette smoking"> Cigarette smoking</label>
+                <label><input type="radio" name="q3" value="Lung infection and impairment of drainage"> Lung infection and impairment of drainage</label>
+                <label><input type="radio" name="q3" value="Lung cancer"> Lung cancer</label>
+                <label><input type="radio" name="q3" value="Silicosis"> Silicosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-4">
+            <p>4. Which gene is associated with bronchiectasis?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="HLA-DR 1"> HLA-DR 1</label>
+                <label><input type="radio" name="q4" value="HLA-DR 2"> HLA-DR 2</label>
+                <label><input type="radio" name="q4" value="HLA-DR 3"> HLA-DR 3</label>
+                <label><input type="radio" name="q4" value="HLA-DR 4"> HLA-DR 4</label>
+                <label><input type="radio" name="q4" value="HLA-B 27"> HLA-B 27</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-5">
+            <p>5. You are reviewing a 40-year-old man who is known to have bronchiectasis. What organism is most likely to be isolated from his sputum?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Streptococcus pneumoniae"> Streptococcus pneumoniae</label>
+                <label><input type="radio" name="q5" value="Klebsiella spp."> Klebsiella spp.</label>
+                <label><input type="radio" name="q5" value="Haemophilus influenzae"> Haemophilus influenzae</label>
+                <label><input type="radio" name="q5" value="Pneumocystis jiroveci"> Pneumocystis jiroveci</label>
+                <label><input type="radio" name="q5" value="Pseudomonas aeruginosa"> Pseudomonas aeruginosa</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-6">
+            <p>6. Each one of the following may result in bronchiectasis, except:</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="Kartagener's syndrome"> Kartagener's syndrome</label>
+                <label><input type="radio" name="q6" value="Amyloidosis"> Amyloidosis</label>
+                <label><input type="radio" name="q6" value="Selective IgA deficiency"> Selective IgA deficiency</label>
+                <label><input type="radio" name="q6" value="Lung cancer"> Lung cancer</label>
+                <label><input type="radio" name="q6" value="Allergic bronchopulmonary aspergillosis"> Allergic bronchopulmonary aspergillosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-7">
+            <p>7. Which one of the following is least associated with bronchiectasis?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Hypogammaglobulinaemia"> Hypogammaglobulinaemia</label>
+                <label><input type="radio" name="q7" value="Allergic bronchopulmonary aspergillosis"> Allergic bronchopulmonary aspergillosis</label>
+                <label><input type="radio" name="q7" value="Measles"> Measles</label>
+                <label><input type="radio" name="q7" value="Cystic fibrosis"> Cystic fibrosis</label>
+                <label><input type="radio" name="q7" value="Sarcoidosis"> Sarcoidosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-8">
+            <p>8. 57-year-old woman has been coughing for 3 years. She always carries tissues with her to collect the phlegm she coughs up throughout the day. Sometimes her phlegm can be green and she feels run-down and unwell. Antibiotics seem to help but she only feels better for 2-3 weeks. The patient is a non-smoker who works in an office. She finds her cough embarrassing and work colleagues have been giving her a hard time. What would be the best investigation for this patient?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="Alpha 1 Antitrypsin levels"> Alpha 1 Antitrypsin levels</label>
+                <label><input type="radio" name="q8" value="Bronchoscopy"> Bronchoscopy</label>
+                <label><input type="radio" name="q8" value="CXR"> CXR</label>
+                <label><input type="radio" name="q8" value="High-resolution CT chest"> High-resolution CT chest</label>
+                <label><input type="radio" name="q8" value="Immunoglobulin levels"> Immunoglobulin levels</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-9">
+            <p>9. 62-year-old man with a history of recurrent lower respiratory tract infections is diagnosed as having bilateral bronchiectasis following a high-resolution CT scan. Which one of the following is most important in the long-term control of his symptoms?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="Inhaled corticosteroids"> Inhaled corticosteroids</label>
+                <label><input type="radio" name="q9" value="Prophylactic antibiotics"> Prophylactic antibiotics</label>
+                <label><input type="radio" name="q9" value="Surgery"> Surgery</label>
+                <label><input type="radio" name="q9" value="Postural drainage"> Postural drainage</label>
+                <label><input type="radio" name="q9" value="Mucolytic therapy"> Mucolytic therapy</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-10">
+            <p>10. Regarding treatment guidelines for bronchiectasis; which one of the following is CORRECT?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Annual influenza vaccine is indicated for severe cases with recurrent exacerbation"> Annual influenza vaccine is indicated for severe cases with recurrent exacerbation</label>
+                <label><input type="radio" name="q10" value="Long-term macrolide and long-term inhaled antibiotics are indicated in cases with 3 or more exacerbations per year"> Long-term macrolide and long-term inhaled antibiotics are indicated in cases with 3 or more exacerbations per year</label>
+                <label><input type="radio" name="q10" value="Airway clearance techniques are very important step in severe cases with 3 or more exacerbations per year"> Airway clearance techniques are very important step in severe cases with 3 or more exacerbations per year</label>
+                <label><input type="radio" name="q10" value="Regular antibiotic treatment for severe cases means anti-staph antibiotics for 2 weeks every 2-3 months"> Regular antibiotic treatment for severe cases means anti-staph antibiotics for 2 weeks every 2-3 months</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11. Both dyskinetic ciliary syndromes and cystic fibrosis lead to recurrent pneumonia, bronchitis, and eventually bronchiectasis. Which of the following manifestations is typical of Kartagener’s syndrome?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="Intestinal obstruction"> Intestinal obstruction</label>
+                <label><input type="radio" name="q11" value="Dextrocardia"> Dextrocardia</label>
+                <label><input type="radio" name="q11" value="Steatorrhea"> Steatorrhea</label>
+                <label><input type="radio" name="q11" value="Interstitial pulmonary fibrosis"> Interstitial pulmonary fibrosis</label>
+                <label><input type="radio" name="q11" value="Infertility"> Infertility</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-12">
+            <p>12. Which one of the following is least associated with Kartagener's syndrome?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="Male subfertility"> Male subfertility</label>
+                <label><input type="radio" name="q12" value="Recurrent sinusitis"> Recurrent sinusitis</label>
+                <label><input type="radio" name="q12" value="Malabsorption"> Malabsorption</label>
+                <label><input type="radio" name="q12" value="Dextrocardia"> Dextrocardia</label>
+                <label><input type="radio" name="q12" value="Bronchiectasis"> Bronchiectasis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-13">
+            <p>13. Which is not a part of 'Kartagener's syndrome':</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="Dextrocardia"> Dextrocardia</label>
+                <label><input type="radio" name="q13" value="Sinusitis"> Sinusitis</label>
+                <label><input type="radio" name="q13" value="Impotence"> Impotence</label>
+                <label><input type="radio" name="q13" value="Bronchiectasis"> Bronchiectasis</label>
+                <label><input type="radio" name="q13" value="Infertility"> Infertility</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-14">
+            <p>14. 79-year-old woman has been increasingly short of breath over 6 months. She has no significant past medical history and is on no medication. She has no significant respiratory exposures. Examination reveals bilateral, fine basal crackles and finger clubbing. An HRCT demonstrates bilateral basal, peripheral reticulation with honeycomb cysts. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="Acute interstitial pneumonia"> Acute interstitial pneumonia</label>
+                <label><input type="radio" name="q14" value="Idiopathic pulmonary fibrosis"> Idiopathic pulmonary fibrosis</label>
+                <label><input type="radio" name="q14" value="Lymphocytic interstitial pneumonia"> Lymphocytic interstitial pneumonia</label>
+                <label><input type="radio" name="q14" value="Non-specific interstitial pneumonia"> Non-specific interstitial pneumonia</label>
+                <label><input type="radio" name="q14" value="Sarcoidosis"> Sarcoidosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-15">
+            <p>15. 65-year-old man presents with progressive shortness-of-breath. On examination he is found to have fine crackles in both lung bases and oxygen saturations of 93% on room air. A diagnosis of idiopathic pulmonary fibrosis is suspected. Which one of the following chest x-ray findings develops first in patients with idiopathic pulmonary fibrosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="Asymmetrical upper zone 'ground-glass' changes"> Asymmetrical upper zone 'ground-glass' changes</label>
+                <label><input type="radio" name="q15" value="Small, peripheral opacities in the lower zones"> Small, peripheral opacities in the lower zones</label>
+                <label><input type="radio" name="q15" value="Perihilar horizontal septal lines"> Perihilar horizontal septal lines</label>
+                <label><input type="radio" name="q15" value="Honeycombing"> Honeycombing</label>
+                <label><input type="radio" name="q15" value="Loss of left heart border"> Loss of left heart border</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-16">
+            <p>16. 67-year-old man presents with progressive exertional dyspnoea. These symptoms have been getting progressively worse over the past nine months and are associated with a dry cough. He gave up smoking 20 cigarettes/day around 30 years ago. On examination his oxygen saturations are 90% on room air, respiratory rate is 14/min and there are some fine bibasal crackles. Finger clubbing is noted. Investigations show the following:
+            B-type natriuretic peptide 88 pg/ml (< 100pg/ml)
+            ECG: sinus rhythm, 72/min
+            Spirometry:
+            FEV1 1.57 L (50% of predicted)
+            FVC 1.63 L (39% of predicted)
+            FEV1/FVC 96%
+            Which investigation is most likely to confirm the diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="Acute vasodilator testing"> Acute vasodilator testing</label>
+                <label><input type="radio" name="q16" value="Echocardiogram"> Echocardiogram</label>
+                <label><input type="radio" name="q16" value="Flow-volume loop"> Flow-volume loop</label>
+                <label><input type="radio" name="q16" value="High-resolution CT scan"> High-resolution CT scan</label>
+                <label><input type="radio" name="q16" value="Ventilation/perfusion scan"> Ventilation/perfusion scan</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-17">
+            <p>17. 42-year-old woman presents with gradually worsening dyspnea over the preceding 6 months. She has a mild nonproductive cough. She previously had been diagnosed with systemic sclerosis (scleroderma) but her skin thickening has been stable. She controls her Raynaud syndrome with amlodipine and her esophageal reflux with daily omeprazole. She has no renal disease or hypertension. On physical examination, her RR is 22/min and resting O2 saturation is 92%. She has thickened, hide-bound skin on the face, torso, and abdomen. Lung examination shows mild “Velcro” rales in the bases bilaterally. Neck veins are flat. Cardiac examination is normal with normal P2 and no lift or heave. Chest x-ray shows increased interstitial lung markings and a normal heart size. What is the most important next step in evaluating this patient’s dyspnea?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="Arterial blood gas"> Arterial blood gas</label>
+                <label><input type="radio" name="q17" value="2D echocardiogram"> 2D echocardiogram</label>
+                <label><input type="radio" name="q17" value="Measurement of autoantibodies including anti-topoisomerase-1 (anti-Scl-70) antibodies"> Measurement of autoantibodies including anti-topoisomerase-1 (anti-Scl-70) antibodies</label>
+                <label><input type="radio" name="q17" value="Barium swallow to detect microaspiration"> Barium swallow to detect microaspiration</label>
+                <label><input type="radio" name="q17" value="Noncontrast high-resolution CT scan (HRCT) of chest"> Noncontrast high-resolution CT scan (HRCT) of chest</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-18">
+            <p>18. Respiratory bronchiolitis-interstitial lung disease (RBILD) is more common in which of the following groups?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="Non-smokers"> Non-smokers</label>
+                <label><input type="radio" name="q18" value="Patients > 65 years of age"> Patients > 65 years of age</label>
+                <label><input type="radio" name="q18" value="Patients with connective tissue diseases"> Patients with connective tissue diseases</label>
+                <label><input type="radio" name="q18" value="Smokers"> Smokers</label>
+                <label><input type="radio" name="q18" value="Women"> Women</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-19">
+            <p>19. 60-year-old farmer presents with fever, cough, shortness of breath. Chest X-ray shows bilateral fluffy nodular shadows. The most likely diagnosis is:</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="Aspergilloma"> Aspergilloma</label>
+                <label><input type="radio" name="q19" value="Extrinsic allergic alveolitis"> Extrinsic allergic alveolitis</label>
+                <label><input type="radio" name="q19" value="Histoplasmosis"> Histoplasmosis</label>
+                <label><input type="radio" name="q19" value="Blastomycosis"> Blastomycosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-20">
+            <p>20. 69-year-old woman has progressive breathlessness on exertion. Because she described a vague feeling of her chest tightening during one of these episodes, her family physician started aspirin and glyceryl trinitrate spray and referred to cardiology. She underwent CT coronary angiogram. This identified no coronary artery disease but diffuse ground glass and some centrilobular nodules were picked up incidentally in the lungs. The patient has no past medical history, worked as a secretary and was a non-smoker. She has kept a pet parrot at home for the last year. What is the likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="Aspirin sensitivity"> Aspirin sensitivity</label>
+                <label><input type="radio" name="q20" value="Breathing artefact"> Breathing artefact</label>
+                <label><input type="radio" name="q20" value="Hypersensitivity pneumonitis"> Hypersensitivity pneumonitis</label>
+                <label><input type="radio" name="q20" value="Idiopathic pulmonary fibrosis"> Idiopathic pulmonary fibrosis</label>
+                <label><input type="radio" name="q20" value="Sarcoidosis"> Sarcoidosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-21">
+            <p>21. What treatment do you recommend for the patient in the previous question?</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="Amphotericin"> Amphotericin</label>
+                <label><input type="radio" name="q21" value="Doxycycline"> Doxycycline</label>
+                <label><input type="radio" name="q21" value="Glucocorticoids"> Glucocorticoids</label>
+                <label><input type="radio" name="q21" value="Glucocorticoids plus azathioprine"> Glucocorticoids plus azathioprine</label>
+                <label><input type="radio" name="q21" value="Glucocorticoids plus removal of antigen"> Glucocorticoids plus removal of antigen</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-22">
+            <p>22. 45-year-old dairy farmer presents with increasing shortness-of-breath on exertion. He is a non-smoker and has no respiratory history of note. His symptoms seem to become much worse when he is around the farm and are associated with chest tightness and a non-productive cough. A diagnosis of extrinsic allergic alveolitis is suspected. Which one of the following is most likely to be responsible?</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="Mycoplasma pneumoniae"> Mycoplasma pneumoniae</label>
+                <label><input type="radio" name="q22" value="Isocyanate-based pesticides"> Isocyanate-based pesticides</label>
+                <label><input type="radio" name="q22" value="Contaminated hay"> Contaminated hay</label>
+                <label><input type="radio" name="q22" value="Cow faeces"> Cow faeces</label>
+                <label><input type="radio" name="q22" value="Ryegrass (Lolium sp.)"> Ryegrass (Lolium sp.)</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-23">
+            <p>23. Which of the following is not a recognised cause of pulmonary eosinophilia?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="Churg-Strauss syndrome"> Churg-Strauss syndrome</label>
+                <label><input type="radio" name="q23" value="Sulphonamides"> Sulphonamides</label>
+                <label><input type="radio" name="q23" value="Extrinsic allergic alveolitis"> Extrinsic allergic alveolitis</label>
+                <label><input type="radio" name="q23" value="Loeffler's syndrome"> Loeffler's syndrome</label>
+                <label><input type="radio" name="q23" value="Allergic bronchopulmonary aspergillosis"> Allergic bronchopulmonary aspergillosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-24">
+            <p>24. Which type of hypersensitivity reaction predominates in the acute phase of extrinsic allergic alveolitis?</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="Type I"> Type I</label>
+                <label><input type="radio" name="q24" value="Type II"> Type II</label>
+                <label><input type="radio" name="q24" value="Type III"> Type III</label>
+                <label><input type="radio" name="q24" value="Type IV"> Type IV</label>
+                <label><input type="radio" name="q24" value="Type V"> Type V</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-25">
+            <p>25. Which one of the following is responsible for farmer's lung?</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="Aspergillus clavatus"> Aspergillus clavatus</label>
+                <label><input type="radio" name="q25" value="Saccharopolyspora rectivirgula"> Saccharopolyspora rectivirgula</label>
+                <label><input type="radio" name="q25" value="Candida albicans"> Candida albicans</label>
+                <label><input type="radio" name="q25" value="Mycobacterium avium"> Mycobacterium avium</label>
+                <label><input type="radio" name="q25" value="Avian proteins"> Avian proteins</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-26">
+            <p>26. Which one of the following is responsible for malt workers' lung?</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="Aspergillus clavatus"> Aspergillus clavatus</label>
+                <label><input type="radio" name="q26" value="Avian proteins"> Avian proteins</label>
+                <label><input type="radio" name="q26" value="Mycobacterium avium"> Mycobacterium avium</label>
+                <label><input type="radio" name="q26" value="Thermoactinomyces candidus"> Thermoactinomyces candidus</label>
+                <label><input type="radio" name="q26" value="Micropolyspora faeni"> Micropolyspora faeni</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-27">
+            <p>27. A preliminary diagnosis of extrinsic allergic alveolitis in a 55-year-old man.  
+            Which one of the following features would most support this diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="Clubbing"> Clubbing</label>
+                <label><input type="radio" name="q27" value="Eosinophilia"> Eosinophilia</label>
+                <label><input type="radio" name="q27" value="Cyanosis"> Cyanosis</label>
+                <label><input type="radio" name="q27" value="Fibrosis in the upper zones"> Fibrosis in the upper zones</label>
+                <label><input type="radio" name="q27" value="History of working in the steel industry"> History of working in the steel industry</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-28">
+            <p>28. What is the first line treatment in allergic bronchopulmonary aspergillosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="Itraconazole"> Itraconazole</label>
+                <label><input type="radio" name="q28" value="Nebulised pentamidine"> Nebulised pentamidine</label>
+                <label><input type="radio" name="q28" value="Fluconazole"> Fluconazole</label>
+                <label><input type="radio" name="q28" value="Cyclophosphamide"> Cyclophosphamide</label>
+                <label><input type="radio" name="q28" value="Prednisolone"> Prednisolone</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-29">
+            <p>29. 67-year-old man is referred to the respiratory clinic. He has a past history of tuberculosis as a child but is otherwise normally fit and well.  
+            Over the past two months he has had a cough, lost one stone in weight and had four episodes of haemoptysis. A chest x-ray shows a solid mass occupying the right upper zone.  
+            Investigation results include the following:  
+            Aspergillus precipitin antibody Positive  
+            What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="Lung abscess"> Lung abscess</label>
+                <label><input type="radio" name="q29" value="Invasive aspergillosis"> Invasive aspergillosis</label>
+                <label><input type="radio" name="q29" value="Aspergilloma"> Aspergilloma</label>
+                <label><input type="radio" name="q29" value="Reactivation of primary tuberculosis"> Reactivation of primary tuberculosis</label>
+                <label><input type="radio" name="q29" value="Allergic bronchopulmonary aspergillosis"> Allergic bronchopulmonary aspergillosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-30">
+            <p>30. 74-year-old woman has a chest x-ray organised by her GP due to a chronic cough. The chest x-ray shows a cavity in the left upper zone inside of which there is a solid mass. An aspergilloma is suspected. What is the most appropriate next test?</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="Sputum culture"> Sputum culture</label>
+                <label><input type="radio" name="q30" value="Serology for Aspergillus precipitins"> Serology for Aspergillus precipitins</label>
+                <label><input type="radio" name="q30" value="Blood culture"> Blood culture</label>
+                <label><input type="radio" name="q30" value="Bronchoscopy with biopsy"> Bronchoscopy with biopsy</label>
+                <label><input type="radio" name="q30" value="Transthoracic fine needle biopsy"> Transthoracic fine needle biopsy</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-31">
+            <p>31. 67-year-old patient with known emphysema presents to the Emergency Department with a two-week history of cough productive of blood-stained sputum. Chest X-Ray shows a circular area of dense right upper lobe consolidation. Despite seven days of intravenous antibiotics (piperacillin and tazobactam) his condition has not improved. An urgent inpatient bronchoscopy reveals no endobronchial lesion but broncho-alveolar lavage reveals an underlying pathogenic organism. Ziehl-Nielson staining is negative.  
+            What organism would you suspect?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="Moraxella catarrhalis"> Moraxella catarrhalis</label>
+                <label><input type="radio" name="q31" value="Aspergillus fumigatus"> Aspergillus fumigatus</label>
+                <label><input type="radio" name="q31" value="Pseudomonas aeruginosa"> Pseudomonas aeruginosa</label>
+                <label><input type="radio" name="q31" value="Mycobacterium tuberculosis"> Mycobacterium tuberculosis</label>
+                <label><input type="radio" name="q31" value="Burkholderia cepacia"> Burkholderia cepacia</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-32">
+            <p>32. Which one of the following causes of lung fibrosis predominantly affect the upper zones?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="Bleomycin"> Bleomycin</label>
+                <label><input type="radio" name="q32" value="Rheumatoid arthritis"> Rheumatoid arthritis</label>
+                <label><input type="radio" name="q32" value="Cryptogenic fibrosis alveolitis"> Cryptogenic fibrosis alveolitis</label>
+                <label><input type="radio" name="q32" value="Methotrexate"> Methotrexate</label>
+                <label><input type="radio" name="q32" value="Extrinsic allergic alveolitis"> Extrinsic allergic alveolitis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-33">
+            <p>33. Which one of the following causes of lung fibrosis predominately affect the lower zones?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="Methotrexate"> Methotrexate</label>
+                <label><input type="radio" name="q33" value="Sarcoidosis"> Sarcoidosis</label>
+                <label><input type="radio" name="q33" value="Coal worker's pneumoconiosis"> Coal worker's pneumoconiosis</label>
+                <label><input type="radio" name="q33" value="Ankylosing spondylitis"> Ankylosing spondylitis</label>
+                <label><input type="radio" name="q33" value="Extrinsic allergic alveolitis"> Extrinsic allergic alveolitis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-34">
+            <p>34. 72-year-old man presents with gradually increasing shortness of breath on exertion over the past six months. He stopped smoking around 20 years ago and had a number of jobs including a builder and miner when he was younger. On auscultation of his chest fine crackles can be heard in both bases. Oxygen saturations are 95% on room air. A number of tests are arranged:  
+            Spirometry: normal  
+            Chest x-ray: diffuse reticular shadowing suggestive of fibrosis affecting the lower zones, Heart size normal.  
+            What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="Extrinsic allergic alveolitis"> Extrinsic allergic alveolitis</label>
+                <label><input type="radio" name="q34" value="Histiocytosis"> Histiocytosis</label>
+                <label><input type="radio" name="q34" value="Asbestosis"> Asbestosis</label>
+                <label><input type="radio" name="q34" value="Silicosis"> Silicosis</label>
+                <label><input type="radio" name="q34" value="Coal worker's pneumoconiosis"> Coal worker's pneumoconiosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-35">
+            <p>35. 62-year-old automobile service worker presents with gradually worsening exertional dyspnea over the preceding several months. Recently, he has noticed right pleuritic chest pain. He has hypertension, well controlled on amlodipine 5 mg/d. He takes no other medications. He has never noticed cough or wheezing while at work. He worked for 15 years in construction and demolition and for 20 years thereafter in the service department of an automotive dealership. He denies fever, chills, or night sweats. On physical examination, he is in no respiratory distress but has right basilar dullness. His finger oximetry reads 96% on room air. Chest x-ray reveals a moderate right pleural effusion and lateral pleural thickening on both sides. Thoracentesis shows reddish fluid, which on formal analysis is an exudate with 45,000 RBCs/hpf. Cytology is negative. What is the most likely explanation for this patient’s symptoms?</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="Drug-induced interstitial lung disease"> Drug-induced interstitial lung disease</label>
+                <label><input type="radio" name="q35" value="Infection due to Mycobacterium tuberculosis"> Infection due to Mycobacterium tuberculosis</label>
+                <label><input type="radio" name="q35" value="Hypersensitivity pneumonitis due to thermophilic actinomycetes"> Hypersensitivity pneumonitis due to thermophilic actinomycetes</label>
+                <label><input type="radio" name="q35" value="Occupational asthma due to isocyanates"> Occupational asthma due to isocyanates</label>
+                <label><input type="radio" name="q35" value="Asbestos exposure"> Asbestos exposure</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-36">
+            <p>36. Which one of the following statements regarding asbestos is not correct?</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="Pleural plaques are premalignant"> Pleural plaques are premalignant</label>
+                <label><input type="radio" name="q36" value="Asbestosis typically affects the lower zones"> Asbestosis typically affects the lower zones</label>
+                <label><input type="radio" name="q36" value="Crocidolite (blue) asbestos is the most dangerous form"> Crocidolite (blue) asbestos is the most dangerous form</label>
+                <label><input type="radio" name="q36" value="Severity of asbestosis is related to the length of exposure"> Severity of asbestosis is related to the length of exposure</label>
+                <label><input type="radio" name="q36" value="Mesothelioma may develop following minimal exposure"> Mesothelioma may develop following minimal exposure</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-37">
+            <p>37. 70-year-old retired plumber is reviewed on the respiratory ward after being admitted from clinic for a pleural tap. He was initially referred by his GP after a chest x-ray showed a unilateral pleural effusion.
+            Past medical history includes depression and lumbar spinal stenosis. Of particular relevance he has never smoked. On admission he was apyrexial and well other than feeling a little short of breath. 30 mins of pleural fluid is tapped from the right pleural space:
+            Appearance cloudy
+            Protein 52g/l
+            pH 7.35
+            MC&S negative
+            Cytology negative
+            A pleural CT is requested but only shows minor thickening on a small area of the right pleura.
+            What is the most appropriate next investigation?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="Repeat pleural tap and send for fluid for further analysis"> Repeat pleural tap and send for fluid for further analysis</label>
+                <label><input type="radio" name="q37" value="CT-guided pleural biopsy"> CT-guided pleural biopsy</label>
+                <label><input type="radio" name="q37" value="CT pulmonary angiography"> CT pulmonary angiography</label>
+                <label><input type="radio" name="q37" value="Local anaesthetic thoracoscopy"> Local anaesthetic thoracoscopy</label>
+                <label><input type="radio" name="q37" value="Bronchoscopy"> Bronchoscopy</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-38">
+            <p>38. 72-year-old man presents with progressive breathlessness over 6 months; more recently he has had a vague ache in the right side of his chest that has kept him awake at night.
+            His past medical history is significant for two separate episodes of 'benign asbestos pleurisy' in his 50s. He has pleural plaques. He had worked in the construction industry and had frequent, heavy exposure to asbestos. He stopped smoking 20 years ago during a bout of pleurisy, having started age 12 years and smoked an average of 20 cigarettes per day.
+            CXR reveals a right-sided pleural effusion and pleural plaques. It is not possible to see the right-sided costophrenic angle.
+            CT scanning reveals pleural plaques, right-sided pleural effusion and mild thickening of the pleura that extends onto the mediastinum anteriorly.
+            What is the most likely reason for his presentation?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="Asbestos pleural plaques"> Asbestos pleural plaques</label>
+                <label><input type="radio" name="q38" value="Asbestosis"> Asbestosis</label>
+                <label><input type="radio" name="q38" value="Benign asbestos pleurisy"> Benign asbestos pleurisy</label>
+                <label><input type="radio" name="q38" value="Diffuse pleural thickening"> Diffuse pleural thickening</label>
+                <label><input type="radio" name="q38" value="Mesothelioma"> Mesothelioma</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-39">
+            <p>39. 63-year-old man presents to the respiratory out-patients department with shortness of breath.
+            Investigations reveal a fibrosing lung disease. A sputum sample however is positive for acid-fast bacilli.
+            Which of the following may have predisposed him to developing tuberculosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="Cadmium"> Cadmium</label>
+                <label><input type="radio" name="q39" value="Coal dust"> Coal dust</label>
+                <label><input type="radio" name="q39" value="White asbestos fibres"> White asbestos fibres</label>
+                <label><input type="radio" name="q39" value="Blue asbestos fibres"> Blue asbestos fibres</label>
+                <label><input type="radio" name="q39" value="Silica"> Silica</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-40">
+            <p>40. 41-year-old stonemason admits to shortness of breath on exertion. A screening CXR and pulmonary function testing are both abnormal so he has been referred to the respiratory clinic. Silicosis results from the inhalation of which of the following?</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="Coal"> Coal</label>
+                <label><input type="radio" name="q40" value="Cotton"> Cotton</label>
+                <label><input type="radio" name="q40" value="Quartz"> Quartz</label>
+                <label><input type="radio" name="q40" value="Silicone"> Silicone</label>
+                <label><input type="radio" name="q40" value="Tin"> Tin</label>
+            </div>
+        </div>
+
+
+        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button class="btn" id="submitBtn" onclick="evaluateQuiz()" style="display: none;">Submit Quiz</button>
+
+        <div class="result" id="result">
+            <h2>Results</h2>
+            <div id="score"></div>
+            <div id="answers-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 40;
+        let score = 0;
+        let timerInterval;
+        const answers = {
+            q1: "Bronchiectasis",
+            q2: "Bronchiectasis",
+            q3: "Lung infection and impairment of drainage",
+            q4: "HLA-DR 1",
+            q5: "Haemophilus influenzae",
+            q6: "Amyloidosis",
+            q7: "Sarcoidosis",
+            q8: "High-resolution CT chest",
+            q9: "Postural drainage",
+            q10: "Airway clearance techniques are very important step in severe cases with 3 or more exacerbations per year",
+            q11: "Dextrocardia",
+            q12: "Malabsorption",
+            q13: "Impotence",
+            q14: "Idiopathic pulmonary fibrosis",
+            q15: "Small, peripheral opacities in the lower zones",
+            q16: "High-resolution CT scan",
+            q17: "Noncontrast high-resolution CT scan (HRCT) of chest",
+            q18: "Smokers",
+            q19: "Extrinsic allergic alveolitis",
+            q20: "Hypersensitivity pneumonitis",
+            q21: "Glucocorticoids plus removal of antigen",
+            q22: "Contaminated hay",
+            q23: "Extrinsic allergic alveolitis",
+            q24: "Type III",
+            q25: "Saccharopolyspora rectivirgula",
+            q26: "Aspergillus clavatus",
+            q27: "Fibrosis in the upper zones",
+            q28: "Prednisolone",
+            q29: "Aspergilloma",
+            q30: "Serology for Aspergillus precipitins",
+            q31: "Aspergillus fumigatus",
+            q32: "Rheumatoid arthritis",
+            q33: "Methotrexate",
+            q34: "Asbestosis",
+            q35: "Asbestos exposure",
+            q36: "Pleural plaques are premalignant",
+            q37: "Local anaesthetic thoracoscopy",
+            q38: "Mesothelioma",
+            q39: "Silica",
+            q40: "Quartz"
+        };
+
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach((q, index) => {
+                q .style.display = index + 1 === currentQuestion ? 'block' : 'none';
+            });
+            document.getElementById('nextBtn').style.display = currentQuestion < totalQuestions ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            clearInterval(timerInterval);
+            startTimer();
+            showQuestion();
+        }
+
+        function startTimer() {
+            let timeRemaining = 60;
+            document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    if (currentQuestion < totalQuestions) {
+                        nextQuestion();
+                    } else {
+                        evaluateQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function evaluateQuiz() {
+            score = 0;
+            let summary = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionElement = document.getElementById(`question-${i}`);
+                const options = document.querySelectorAll(`input[name="q${i}"]`);
+                let questionSummary = `<p><strong>Question ${i}: </strong>${questionElement.querySelector('p').innerText}</p>`;
+
+                options.forEach(option => {
+                    const optionLabel = option.parentElement;
+                    if (option.value === correctAnswer) {
+                        optionLabel.style.color = 'green';
+                    } else if (selectedOption && selectedOption.value === option.value) {
+                        optionLabel.style.color = 'red';
+                    }
+                });
+
+                questionSummary += `<div>Answer: <strong>${selectedOption ? selectedOption.value : 'None selected'}</strong></div>`;
+                questionSummary += `<div>Correct answer: <strong>${correctAnswer}</strong></div>`;
+
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    summary += questionSummary + `<p class="correct">Correct</p>`;
+                } else {
+                    summary += questionSummary + `<p class="incorrect">Incorrect</p>`;
+                }
+            }
+
+            document.getElementById('score').textContent = `Your score: ${score} out of ${totalQuestions}`;
+            document.getElementById('answers-summary').innerHTML = summary;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timer').style.display = 'none'; 
+            document.querySelectorAll('.question').forEach((q) => q.style.display = 'none');
+
+            clearInterval(timerInterval);
+        }
+
+        window.onload = function() {
+            showQuestion();
+            startTimer();
+        };
+        
+        
+        function nextQuestion() {
+    // Increase the current question counter
+            currentQuestion++;
+
+            // Reset the timer
+            clearInterval(timerInterval); // Stop the current timer
+            startTimer(); // Start the timer from the beginning
+
+            // Show the next question
+            showQuestion();
+        }
+        
+    </script>
+</body>
+</html>
